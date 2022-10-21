@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <menuitem
+            id="hr_hospital_menu_root"
+            name="Hospital"
+            web_icon="hr_hospital,static/description/icon.png"
+            sequence="10"
+    />
+
+    <menuitem
+            id="hr_hospital_menu_patients"
+            name="Пацієнти"
+            parent="hr_hospital_menu_root"
+            sequence="10"
+    />
+
+    <menuitem
+            id="hr_hospital_menu_patient"
+            name="Patient"
+            parent="hr_hospital_menu_patients"
+            action="hr_hospital_patient_act_window"
+            sequence="10"
+    />
+    <menuitem
+            id="hr_hospital_menu_patient_card"
+            name="Patient card"
+            parent="hr_hospital_menu_patients"
+            action="hr_hospital_patient_card_act_window"
+            sequence="20"
+    />
+    <menuitem
+            id="hr_hospital_menu_diagnosis"
+            name="Diagnosis"
+            parent="hr_hospital_menu_patients"
+            action="hr_hospital_diagnosis_act_window"
+            sequence="30"
+    />
+
+    <menuitem
+            id="hr_hospital_menu_doctors"
+            name="Лікарі"
+            parent="hr_hospital_menu_root"
+            sequence="20"
+    />
+    <menuitem
+            id="hr_hospital_menu_doctor"
+            name="Doctor"
+            parent="hr_hospital_menu_doctors"
+            action="hr_hospital_doctor_act_window"
+            sequence="10"
+    />
+
+</odoo>
