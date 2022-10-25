@@ -23,7 +23,7 @@
         </field>
     </record>
 
-    <record id="hr_hospital_patient_act_window" model="ir.actions.act_window">
+    <record id="hr_hospital_patient_action" model="ir.actions.act_window">
         <field name="name">Patient</field>
         <field name="res_model">hr_hospital.patient</field>
         <field name="view_mode">tree,form</field>

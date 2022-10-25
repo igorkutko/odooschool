@@ -6,9 +6,14 @@
         <field name="model">hr_hospital.doctor</field>
         <field name="arch" type="xml">
             <form>
-                <group>
-                    <field name="name"/>
-                </group>
+                <!-- Бажано використовувати тег "sheet",
+                     і поле "name" розміщувати у спеціальному блоці "title". -->
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h3><field name="name" placeholder="Name"/></h3>
+                    </div>
+                </sheet>
             </form>
         </field>
     </record>
@@ -23,7 +28,7 @@
         </field>
     </record>
 
-    <record id="hr_hospital_doctor_act_window" model="ir.actions.act_window">
+    <record id="hr_hospital_doctor_action" model="ir.actions.act_window">
         <field name="name">Doctor</field>
         <field name="res_model">hr_hospital.doctor</field>
         <field name="view_mode">tree,form</field>

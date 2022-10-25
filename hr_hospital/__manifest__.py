@@ -19,7 +19,7 @@ Hospital: human resources
         'views/patient_card_views.xml',
         'views/doctor_views.xml',
         'views/diagnosis_views.xml',
-        'views/menu.xml',
+        'views/hr_hospital_menus.xml',
     ],
 
     'demo': [
