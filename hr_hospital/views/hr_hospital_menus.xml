@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <menuitem
+            id="hr_hospital_menu_root"
+            name="Hospital"
+            web_icon="hr_hospital,static/description/icon.png"
+            sequence="10"
+    />
+
+    <menuitem
+            id="hr_hospital_menu_patients"
+            name="Пацієнти"
+            parent="hr_hospital_menu_root"
+            sequence="10"
+    />
+
+    <!-- Для зручності подальшої роботи з модулем, бажано меню по моделей додавати у відповідних файлах,
+         наприклад: для "Patient" у файл "patient_views.xml" і т.д.
+         Це дозволить зразу розуміти, що всі представлення та записи, що пов'язані з цією
+         моделью знаходяться у одному файлі. -->
+    <menuitem
+            id="hr_hospital_menu_patient"
+            name="Patient"
+            parent="hr_hospital_menu_patients"
+            action="hr_hospital_patient_action"
+            sequence="10"
+    />
+    <menuitem
+            id="hr_hospital_menu_patient_card"
+            name="Patient card"
+            parent="hr_hospital_menu_patients"
+            action="hr_hospital_patient_card_action"
+            sequence="20"
+    />
+    <menuitem
+            id="hr_hospital_menu_diagnosis"
+            name="Diagnosis"
+            parent="hr_hospital_menu_patients"
+            action="hr_hospital_diagnosis_action"
+            sequence="30"
+    />
+
+    <menuitem
+            id="hr_hospital_menu_doctors"
+            name="Лікарі"
+            parent="hr_hospital_menu_root"
+            sequence="20"
+    />
+    <menuitem
+            id="hr_hospital_menu_doctor"
+            name="Doctor"
+            parent="hr_hospital_menu_doctors"
+            action="hr_hospital_doctor_action"
+            sequence="10"
+    />
+
+</odoo>
