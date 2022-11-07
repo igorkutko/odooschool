@@ -9,4 +9,6 @@ class Person(models.AbstractModel):
     phone_number = fields.Char()
     email = fields.Char(string='E-mail')
     photo = fields.Image()
-    gender = fields.Selection(selection=[('male', 'Male'), ('female', 'Female')])
+    gender = fields.Selection(
+        selection=[('male', 'Male'), ('female', 'Female')]
+    )

@@ -1,5 +1,5 @@
-from odoo import api, fields, models
 from datetime import datetime
+from odoo import api, fields, models
 
 
 class DoctorSchedule(models.Model):
@@ -12,13 +12,17 @@ class DoctorSchedule(models.Model):
     reception_end_date = fields.Datetime()
 
     _sql_constraints = [
-        ('reception_date_uniq', 'UNIQUE(doctor_id, reception_start_date)', 'Reception start date must be unique.'),
+        ('reception_date_uniq',
+         'UNIQUE(doctor_id, reception_start_date)',
+         'Reception start date must be unique.'),
     ]
 
     @api.depends('doctor_id', 'reception_start_date', 'reception_end_date')
     def _compute_name(self):
-        format_str = '%d.%m.%Y %H:%M:%S'
+        fmt = '%d.%m.%Y %H:%M:%S'
         for obj in self:
-            start_date = datetime.strftime(obj.reception_start_date, format_str) if obj.reception_start_date else ''
-            end_date = datetime.strftime(obj.reception_end_date, format_str) if obj.reception_end_date else ''
+            rsd = obj.reception_start_date
+            red = obj.reception_end_date
+            start_date = datetime.strftime(rsd, fmt) if rsd else ''
+            end_date = datetime.strftime(red, fmt) if red else ''
             obj.name = f'{obj.doctor_id.name}: {start_date} - {end_date}'

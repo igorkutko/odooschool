@@ -19,4 +19,4 @@ class Diagnosis(models.Model):
     @api.constrains('doctor_id')
     def _check_mentor_comment(self):
         if self.doctor_id.is_intern and not self.mentor_comment:
-            raise ValidationError(_('Mentor comment is required for intern doctor!'))
+            raise ValidationError(_('Mentor comment is required for intern!'))

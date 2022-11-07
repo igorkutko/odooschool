@@ -24,15 +24,15 @@ class DiseaseReport(models.TransientModel):
     def _select(self):
         select_clause = """
             SELECT
-                diagnosis.id AS id,                        
-                diagnosis.id AS diagnosis_id,                        
-                diagnosis.diagnosis_date AS diagnosis_date,                        
-                EXTRACT(year from diagnosis.diagnosis_date) AS period_year, 
-                EXTRACT(month from diagnosis.diagnosis_date) AS period_month, 
-                diagnosis.disease_id AS disease_id,                        
-                diagnosis.doctor_id AS doctor_id,                        
-                diagnosis.patient_id AS patient_id,                        
-                1 AS disease_count                        
+                diagnosis.id AS id,
+                diagnosis.id AS diagnosis_id,
+                diagnosis.diagnosis_date AS diagnosis_date,
+                EXTRACT(year from diagnosis.diagnosis_date) AS period_year,
+                EXTRACT(month from diagnosis.diagnosis_date) AS period_month,
+                diagnosis.disease_id AS disease_id,
+                diagnosis.doctor_id AS doctor_id,
+                diagnosis.patient_id AS patient_id,
+                1 AS disease_count
         """
         return select_clause
 
@@ -46,7 +46,7 @@ class DiseaseReport(models.TransientModel):
 
     def _where(self):
         self.ensure_one()
-        where_clause = f"""
+        where_clause = """
             WHERE
                 TRUE
         """

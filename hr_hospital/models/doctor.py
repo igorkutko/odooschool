@@ -8,4 +8,7 @@ class Doctor(models.Model):
 
     specialty = fields.Char()
     is_intern = fields.Boolean()
-    mentor_id = fields.Many2one(comodel_name='hr_hospital.doctor', domain=[('is_intern', '=', False)])
+    mentor_id = fields.Many2one(
+        comodel_name='hr_hospital.doctor',
+        domain=[('is_intern', '=', False)]
+    )

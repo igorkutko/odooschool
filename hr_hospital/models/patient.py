@@ -10,8 +10,12 @@ class Patient(models.Model):
     birth_date = fields.Date()
     age = fields.Integer(compute='_compute_age')
     passport_data = fields.Char()
-    contact_person_id = fields.Many2one(comodel_name='hr_hospital.contact_person')
-    personal_doctor_id = fields.Many2one(comodel_name='hr_hospital.doctor')
+    contact_person_id = fields.Many2one(
+        comodel_name='hr_hospital.contact_person'
+    )
+    personal_doctor_id = fields.Many2one(
+        comodel_name='hr_hospital.doctor'
+    )
 
     def write(self, vals):
         result = super(Patient, self).write(vals)
@@ -30,15 +34,17 @@ class Patient(models.Model):
                 ('patient_id', '=', history_vals.get('patient_id')),
                 ('doctor_id', '=', history_vals.get('doctor_id')),
             ]
-            history_recs = self.env['hr_hospital.personal_doctor_history'].search(key_domain)
+            pd_manager = self.env['hr_hospital.personal_doctor_history']
+            history_recs = pd_manager.search(key_domain)
             if history_recs:
                 continue
 
-            self.env['hr_hospital.personal_doctor_history'].create(history_vals)
+            pd_manager.create(history_vals)
 
         return result
 
     @api.depends('birth_date')
     def _compute_age(self):
         for obj in self:
-            obj.age = relativedelta(fields.Date.today(), obj.birth_date).years if obj.birth_date else 0
+            bd = obj.birth_date
+            obj.age = relativedelta(fields.Date.today(), bd).years if bd else 0
