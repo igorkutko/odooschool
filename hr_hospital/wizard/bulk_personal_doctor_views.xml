@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_hospital_bulk_personal_doctor_view_form" model="ir.ui.view">
+        <field name="name">Bulk personal doctor form view</field>
+        <field name="model">hr_hospital.bulk_personal_doctor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="personal_doctor_id"/>
+                    </group>
+                    <group>
+                        <field name="patient_ids"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button type="object" name="bulk_personal_doctor" string="Bulk personal doctor" icon="fa-star"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_hospital_bulk_personal_doctor_action" model="ir.actions.act_window">
+        <field name="name">Bulk personal doctor</field>
+        <field name="res_model">hr_hospital.bulk_personal_doctor</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_hr_hospital_patient"/>
+        <field name="binding_view_types">list</field>
+        <field name="binding_type">action</field>
+    </record>
+
+</odoo>

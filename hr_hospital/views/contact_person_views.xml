@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
 
-    <record id="hr_hospital_doctor_view_form" model="ir.ui.view">
-        <field name="name">Doctor form view</field>
-        <field name="model">hr_hospital.doctor</field>
+    <record id="hr_hospital_contact_person_view_form" model="ir.ui.view">
+        <field name="name">Contact person form view</field>
+        <field name="model">hr_hospital.contact_person</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -13,46 +13,42 @@
                     </div>
                     <group>
                         <field name="photo"/>
+                        <field name="full_name"/>
                         <field name="phone_number"/>
                         <field name="email"/>
                         <field name="gender"/>
-                        <field name="specialty"/>
-                        <field name="is_intern"/>
-                        <field name="mentor_id"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="hr_hospital_doctor_view_tree" model="ir.ui.view">
-        <field name="name">Doctor list view</field>
-        <field name="model">hr_hospital.doctor</field>
+    <record id="hr_hospital_contact_person_view_tree" model="ir.ui.view">
+        <field name="name">Contact person list view</field>
+        <field name="model">hr_hospital.contact_person</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="full_name"/>
                 <field name="phone_number"/>
                 <field name="email"/>
-                <field name="photo"/>
                 <field name="gender"/>
-                <field name="specialty"/>
-                <field name="is_intern"/>
-                <field name="mentor_id"/>
+                <field name="photo"/>
             </tree>
         </field>
     </record>
 
-    <record id="hr_hospital_doctor_action" model="ir.actions.act_window">
-        <field name="name">Doctor</field>
-        <field name="res_model">hr_hospital.doctor</field>
+    <record id="hr_hospital_contact_person_action" model="ir.actions.act_window">
+        <field name="name">Contact person</field>
+        <field name="res_model">hr_hospital.contact_person</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem
-            id="hr_hospital_menu_doctor"
-            name="Doctor"
-            parent="hr_hospital_menu_doctors"
-            action="hr_hospital_doctor_action"
+            id="hr_hospital_menu_contact_person"
+            name="Contact person"
+            parent="hr_hospital_menu_setting"
+            action="hr_hospital_contact_person_action"
             sequence="10"
     />
 

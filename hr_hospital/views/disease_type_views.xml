@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_hospital_disease_type_view_form" model="ir.ui.view">
+        <field name="name">Disease type form view</field>
+        <field name="model">hr_hospital.disease_type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h3><field name="name" placeholder="Name"/></h3>
+                    </div>
+                    <group>
+                        <field name="complete_name"/>
+                        <field name="parent_id"/>
+                        <field name="parent_path"/>
+                        <field name="disease_count"/>
+                        <field name="child_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_hospital_disease_type_view_tree" model="ir.ui.view">
+        <field name="name">Disease type list view</field>
+        <field name="model">hr_hospital.disease_type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="complete_name"/>
+                <field name="parent_id"/>
+                <field name="parent_path"/>
+                <field name="disease_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_hospital_disease_type_action" model="ir.actions.act_window">
+        <field name="name">Disease type</field>
+        <field name="res_model">hr_hospital.disease_type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="hr_hospital_menu_disease_type"
+            name="Disease type"
+            parent="hr_hospital_menu_setting"
+            action="hr_hospital_disease_type_action"
+            sequence="20"
+    />
+
+</odoo>

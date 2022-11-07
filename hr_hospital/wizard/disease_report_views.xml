@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_hospital_disease_report_view_pivot" model="ir.ui.view">
+        <field name="name">Disease report pivot view</field>
+        <field name="model">hr_hospital.disease_report</field>
+        <field name="arch" type="xml">
+            <pivot string="Disease count">
+                <field name="disease_id" type="row"/>
+                <field name="disease_count" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="hr_hospital_disease_report_view_graph" model="ir.ui.view">
+        <field name="name">Disease report graph view</field>
+        <field name="model">hr_hospital.disease_report</field>
+        <field name="arch" type="xml">
+            <graph string="Disease count" type="line">
+                <field name="disease_id"/>
+                <field name="disease_count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="hr_hospital_disease_report_action_execute" model="ir.actions.act_window">
+        <field name="name">Disease report</field>
+        <field name="res_model">hr_hospital.disease_report</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="binding_model_id" ref="model_hr_hospital_doctor"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="binding_type">report</field>
+    </record>
+
+<!--    <record id="hr_hospital_disease_report_view_form" model="ir.ui.view">-->
+<!--        <field name="name">Disease report form view</field>-->
+<!--        <field name="model">hr_hospital.disease_report</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Disease count">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="period_year"/>-->
+<!--                        <field name="period_month"/>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--                <footer>-->
+<!--                    <button type="action" name="%(hr_hospital.hr_hospital_disease_report_action_execute)d" string="Ok"/>-->
+<!--                    <button special="cancel" string="Cancel"/>-->
+<!--                </footer>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="hr_hospital_disease_report_action_parameter" model="ir.actions.act_window">-->
+<!--        <field name="name">Disease report</field>-->
+<!--        <field name="res_model">hr_hospital.disease_report</field>-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="target">new</field>-->
+<!--        <field name="binding_model_id" ref="model_hr_hospital_doctor"/>-->
+<!--        <field name="binding_view_types">list,form</field>-->
+<!--        <field name="binding_type">report</field>-->
+<!--    </record>-->
+
+    <menuitem
+            id="hr_hospital_menu_disease_report"
+            name="Disease report"
+            parent="hr_hospital_menu_report"
+            action="hr_hospital_disease_report_action_execute"
+            sequence="10"
+    />
+
+</odoo>

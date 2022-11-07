@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_hospital_personal_doctor_history_view_form" model="ir.ui.view">
+        <field name="name">Personal doctor history form view</field>
+        <field name="model">hr_hospital.personal_doctor_history</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h3><field name="name" placeholder="Name"/></h3>
+                    </div>
+                    <group>
+                        <field name="appointment_date"/>
+                        <field name="patient_id"/>
+                        <field name="doctor_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_hospital_personal_doctor_history_view_tree" model="ir.ui.view">
+        <field name="name">Personal doctor history list view</field>
+        <field name="model">hr_hospital.personal_doctor_history</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="appointment_date"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_hospital_personal_doctor_history_action" model="ir.actions.act_window">
+        <field name="name">Personal doctor history</field>
+        <field name="res_model">hr_hospital.personal_doctor_history</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="hr_hospital_menu_personal_doctor_history"
+            name="Personal doctor history"
+            parent="hr_hospital_menu_patients"
+            action="hr_hospital_personal_doctor_history_action"
+            sequence="40"
+    />
+
+</odoo>
