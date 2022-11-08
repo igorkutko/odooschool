@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_hospital_change_visit_view_form" model="ir.ui.view">
+        <field name="name">Change visit form view</field>
+        <field name="model">hr_hospital.change_visit</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="visit_id"/>
+                    <field name="doctor_id"/>
+                    <field name="visit_date"/>
+                </group>
+                <footer>
+                    <button type="object" name="change_visit" string="Change visit" icon="fa-star"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_hospital_change_visit_action" model="ir.actions.act_window">
+        <field name="name">Change visit</field>
+        <field name="res_model">hr_hospital.change_visit</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_hr_hospital_visit"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="binding_type">action</field>
+    </record>
+
+</odoo>

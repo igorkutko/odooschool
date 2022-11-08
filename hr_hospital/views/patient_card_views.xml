@@ -6,10 +6,13 @@
         <field name="model">hr_hospital.patient_card</field>
         <field name="arch" type="xml">
             <form>
-                <group>
-                    <field name="name"/>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h3><field name="name" placeholder="Name"/></h3>
+                    </div>
                     <field name="patient_id"/>
-                </group>
+                </sheet>
             </form>
         </field>
     </record>
@@ -30,5 +33,13 @@
         <field name="res_model">hr_hospital.patient_card</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+    <menuitem
+            id="hr_hospital_menu_patient_card"
+            name="Patient card"
+            parent="hr_hospital_menu_patients"
+            action="hr_hospital_patient_card_action"
+            sequence="20"
+    />
 
 </odoo>
