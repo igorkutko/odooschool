@@ -114,14 +114,13 @@ class ChangeDoctorSchedule(models.TransientModel):
                 cur_date.date(),
                 end_work_time)
 
-            domain = [
+            ds_manager = self.env['hr_hospital.doctor_schedule']
+            recs = ds_manager.search([
                 ('doctor_id', '=', doctor_id.id),
                 ('reception_start_date',
                  '=',
                  ds_vals.get('reception_start_date')),
-            ]
-            ds_manager = self.env['hr_hospital.doctor_schedule']
-            recs = ds_manager.search(domain)
+            ])
             if recs:
                 for rec in recs:
                     rec.write(ds_vals)
@@ -153,14 +152,13 @@ class ChangeDoctorSchedule(models.TransientModel):
                 cur_date.date(),
                 end_work_time)
 
-            domain = [
+            ds_manager = self.env['hr_hospital.doctor_schedule']
+            recs = ds_manager.search([
                 ('doctor_id', '=', doctor_id.id),
                 ('reception_start_date',
                  '=',
                  ds_vals.get('reception_start_date')),
-            ]
-            ds_manager = self.env['hr_hospital.doctor_schedule']
-            recs = ds_manager.search(domain)
+            ])
             if recs:
                 for rec in recs:
                     rec.write(ds_vals)

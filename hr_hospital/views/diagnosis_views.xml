@@ -42,10 +42,43 @@
         </field>
     </record>
 
+    <record id="hr_hospital_diagnosis_view_pivot" model="ir.ui.view">
+        <field name="name">Diagnosis pivot view</field>
+        <field name="model">hr_hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <pivot display_quantity="1">
+                <field name="disease_type_id" type="row"/>
+                <field name="disease_id" type="row"/>
+                <field name="diagnosis_year" type="col"/>
+                <field name="diagnosis_date" interval="month" type="col"/>
+                <field name="avg_qty" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="hr_hospital_diagnosis_view_graph" model="ir.ui.view">
+        <field name="name">Diagnosis graph view</field>
+        <field name="model">hr_hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="disease_type_id"/>
+                <field name="diagnosis_date" interval="month"/>
+                <field name="qty" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
     <record id="hr_hospital_diagnosis_action" model="ir.actions.act_window">
         <field name="name">Diagnosis</field>
         <field name="res_model">hr_hospital.diagnosis</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+    </record>
+
+    <record id="hr_hospital_diagnosis_action_by_patient" model="ir.actions.act_window">
+        <field name="name">Diagnosis</field>
+        <field name="res_model">hr_hospital.diagnosis</field>
         <field name="view_mode">tree,form</field>
+        <field name="domain">[('patient_id', '=', active_id)]</field>
     </record>
 
     <menuitem
