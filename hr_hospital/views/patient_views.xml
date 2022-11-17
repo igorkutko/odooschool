@@ -6,7 +6,45 @@
         <field name="model">hr_hospital.patient</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="%(hr_hospital.hr_hospital_visit_action_create_by_patient)d"
+                            type="action"
+                            string="Create a visit"
+                            icon="fa-handshake-o"/>
+                </header>
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="%(hr_hospital.hr_hospital_visit_action_by_patient)d" type="action"
+                                class="oe_stat_button" icon="fa-handshake-o"
+                                attrs="{'invisible': False}"
+                        >
+                            <div class="o_stat_info">
+                                <field name="visit_count" class="oe_stat_value"/>
+                                <span class="o_stat_text" attrs="{'invisible': [('visit_count', '&lt;', 2)]}"> Visits</span>
+                                <span class="o_stat_text" attrs="{'invisible': [('visit_count', '&gt;', 1)]}"> Visit</span>
+                            </div>
+                        </button>
+                        <button name="%(hr_hospital.hr_hospital_diagnosis_action_by_patient)d" type="action"
+                                class="oe_stat_button" icon="fa-heartbeat"
+                                attrs="{'invisible': False}"
+                        >
+                            <div class="o_stat_info">
+                                <field name="diagnosis_count" class="oe_stat_value"/>
+                                <span class="o_stat_text" attrs="{'invisible': [('diagnosis_count', '&lt;', 2)]}"> Diagnoses</span>
+                                <span class="o_stat_text" attrs="{'invisible': [('diagnosis_count', '&gt;', 1)]}"> Diagnosis</span>
+                            </div>
+                        </button>
+                        <button name="%(hr_hospital.hr_hospital_research_action_by_patient)d" type="action"
+                                class="oe_stat_button" icon="fa-balance-scale"
+                                attrs="{'invisible': False}"
+                        >
+                            <div class="o_stat_info">
+                                <field name="research_count" class="oe_stat_value"/>
+                                <span class="o_stat_text" attrs="{'invisible': [('research_count', '&lt;', 2)]}"> Researches</span>
+                                <span class="o_stat_text" attrs="{'invisible': [('research_count', '&gt;', 1)]}"> Research</span>
+                            </div>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only"/>
                         <h3><field name="name" placeholder="Name"/></h3>
@@ -22,6 +60,33 @@
                         <field name="contact_person_id"/>
                         <field name="personal_doctor_id"/>
                     </group>
+                    <notebook>
+                        <page string="Personal doctor history">
+                            <field name="personal_doctor_history_ids">
+                                <tree>
+                                    <field name="name" optional="show"/>
+                                    <field name="appointment_date"/>
+                                    <field name="doctor_id"/>
+                                    <field name="patient_id" optional="hide"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Diagnosis history">
+                            <field name="diagnosis_ids">
+                                <tree>
+                                    <field name="name" optional="show"/>
+                                    <field name="diagnosis_date"/>
+                                    <field name="patient_card_id" optional="show"/>
+                                    <field name="doctor_id"/>
+                                    <field name="disease_id"/>
+                                    <field name="treatment"/>
+                                    <field name="description" optional="show"/>
+                                    <field name="mentor_comment" optional="show"/>
+                                    <field name="patient_id" optional="hide"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -44,6 +109,16 @@
                 <field name="personal_doctor_id"/>
             </tree>
         </field>
+    </record>
+
+    <record id="hr_hospital_patient_action_create_visit" model="ir.actions.act_window">
+        <field name="name">Create visit for patient</field>
+        <field name="res_model">hr_hospital.visit</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="model_hr_hospital_patient"/>
+        <field name="binding_view_types">form</field>
+        <field name="binding_type">action</field>
+        <field name="context">{'default_patient_id': active_id}</field>
     </record>
 
     <record id="hr_hospital_patient_action" model="ir.actions.act_window">

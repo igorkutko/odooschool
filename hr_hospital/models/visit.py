@@ -8,6 +8,7 @@ class Visit(models.Model):
 
     name = fields.Char()
     visit_date = fields.Datetime()
+    visit_stop_date = fields.Datetime()
     patient_id = fields.Many2one(comodel_name='hr_hospital.patient')
     doctor_id = fields.Many2one(comodel_name='hr_hospital.doctor')
     diagnosis_id = fields.Many2one(comodel_name='hr_hospital.diagnosis')

@@ -16,6 +16,19 @@ class Patient(models.Model):
     personal_doctor_id = fields.Many2one(
         comodel_name='hr_hospital.doctor'
     )
+    personal_doctor_history_ids = fields.One2many(
+        comodel_name='hr_hospital.personal_doctor_history',
+        inverse_name='patient_id',
+        readonly=True
+    )
+    diagnosis_ids = fields.One2many(
+        comodel_name='hr_hospital.diagnosis',
+        inverse_name='patient_id',
+        readonly=True
+    )
+    visit_count = fields.Integer(compute='_compute_visit_count')
+    diagnosis_count = fields.Integer(compute='_compute_diagnosis_count')
+    research_count = fields.Integer(compute='_compute_research_count')
 
     def write(self, vals):
         result = super(Patient, self).write(vals)
@@ -48,3 +61,21 @@ class Patient(models.Model):
         for obj in self:
             bd = obj.birth_date
             obj.age = relativedelta(fields.Date.today(), bd).years if bd else 0
+
+    def _compute_visit_count(self):
+        visit_manager = self.env['hr_hospital.visit']
+        for obj in self:
+            domain = [('patient_id', '=', obj.id)]
+            obj.visit_count = visit_manager.search_count(domain)
+
+    def _compute_diagnosis_count(self):
+        diagnosis_manager = self.env['hr_hospital.diagnosis']
+        for obj in self:
+            domain = [('patient_id', '=', obj.id)]
+            obj.diagnosis_count = diagnosis_manager.search_count(domain)
+
+    def _compute_research_count(self):
+        research_manager = self.env['hr_hospital.research']
+        for obj in self:
+            domain = [('patient_id', '=', obj.id)]
+            obj.research_count = research_manager.search_count(domain)
