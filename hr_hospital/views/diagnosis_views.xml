@@ -19,6 +19,7 @@
                         <field name="disease_id"/>
                         <field name="treatment"/>
                         <field name="diagnosis_date"/>
+                        <field name="mentor_comment"/>
                     </group>
                 </sheet>
             </form>
@@ -38,6 +39,7 @@
                 <field name="disease_id"/>
                 <field name="description"/>
                 <field name="treatment"/>
+                <field name="mentor_comment"/>
             </tree>
         </field>
     </record>

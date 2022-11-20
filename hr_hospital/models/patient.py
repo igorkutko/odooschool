@@ -21,13 +21,26 @@ class Patient(models.Model):
         inverse_name='patient_id',
         readonly=True
     )
+    visit_ids = fields.One2many(
+        comodel_name='hr_hospital.visit',
+        inverse_name='patient_id',
+        readonly=True
+    )
     diagnosis_ids = fields.One2many(
         comodel_name='hr_hospital.diagnosis',
         inverse_name='patient_id',
         readonly=True
     )
+    research_ids = fields.One2many(
+        comodel_name='hr_hospital.research',
+        inverse_name='patient_id',
+        readonly=True
+    )
     visit_count = fields.Integer(compute='_compute_visit_count')
-    diagnosis_count = fields.Integer(compute='_compute_diagnosis_count')
+    diagnosis_count = fields.Integer(
+        compute='_compute_diagnosis_count',
+        store=True
+    )
     research_count = fields.Integer(compute='_compute_research_count')
 
     def write(self, vals):
@@ -62,18 +75,21 @@ class Patient(models.Model):
             bd = obj.birth_date
             obj.age = relativedelta(fields.Date.today(), bd).years if bd else 0
 
+    @api.depends('visit_ids')
     def _compute_visit_count(self):
         visit_manager = self.env['hr_hospital.visit']
         for obj in self:
             domain = [('patient_id', '=', obj.id)]
             obj.visit_count = visit_manager.search_count(domain)
 
+    @api.depends('diagnosis_ids')
     def _compute_diagnosis_count(self):
         diagnosis_manager = self.env['hr_hospital.diagnosis']
         for obj in self:
             domain = [('patient_id', '=', obj.id)]
             obj.diagnosis_count = diagnosis_manager.search_count(domain)
 
+    @api.depends('research_ids')
     def _compute_research_count(self):
         research_manager = self.env['hr_hospital.research']
         for obj in self:

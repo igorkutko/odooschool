@@ -33,6 +33,8 @@ Hospital: human resources
         'wizard/change_doctor_schedule_views.xml',
         'wizard/change_visit_views.xml',
         'wizard/disease_report_views.xml',
+        'report/doctor_report_templates.xml',
+        'report/doctor_report_views.xml',
     ],
 
     'demo': [
