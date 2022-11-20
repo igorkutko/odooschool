@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="hr_hospital_doctor_report_logo_template">
+        <div class="row">
+            <div class="col-6"/>
+            <div class="col-6">
+                <img t-att-src="image_data_uri(user.company_id.logo)" style="max-height: 45px;" alt="logo"/>
+            </div>
+        </div>
+    </template>
+
+    <template id="hr_hospital_doctor_report_timestamp_template">
+        <div class="row">
+            <div class="col-6"/>
+            <div class="col-6 text-right">
+                <strong>
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                </strong>
+            </div>
+        </div>
+    </template>
+
+    <template id="hr_hospital_doctor_report_header_template">
+        <div class="row">
+            <div class="col-4">
+                <span>Doctor report</span>
+            </div>
+            <div class="col-4 text-center">
+                <strong>
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                </strong>
+            </div>
+            <div class="col-4 text-right">
+                <img t-att-src="image_data_uri(user.company_id.logo)" style="max-height: 45px;" alt="logo"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div style="border-bottom: 1px solid black;"/>
+            </div>
+        </div>
+    </template>
+
+    <template id="hr_hospital_doctor_report_footer_template">
+        <div class="text-center" style="border-top: 1px solid black">
+            <div t-if="report_type == 'pdf'">
+                Page: <span class="page"/> / <span class="topage"/>
+            </div>
+        </div>
+    </template>
+
+    <template id="hr_hospital_doctor_report_layout">
+
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <t t-call="hr_hospital.hr_hospital_doctor_report_header_template"/>
+        </div>
+        <div t-attf-class="article o_company_#{company.id}_layout">
+            <t t-out="0"/>
+        </div>
+        <div t-attf-class="footer o_company_#{company.id}_layout">
+            <t t-call="hr_hospital.hr_hospital_doctor_report_footer_template"/>
+        </div>
+    </template>
+
+    <template id="hr_hospital_doctor_report_object_template">
+<!--        <t t-call="web.external_layout">-->
+        <t t-if="not company">
+           <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <t t-call="hr_hospital.hr_hospital_doctor_report_layout">
+            <div class="page">
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <span>Company: </span>
+                        <span t-field="company.name" />
+                        <br/>
+                        <span>Address: </span>
+                        <span t-field="company.street" />
+                        <span>, </span>
+                        <span t-field="company.city" />
+                        <span>, </span>
+                        <span t-field="company.country_id.name" />
+                        <br/>
+                        <span>Phone: </span>
+                        <span t-field="company.phone" />
+                    </div>
+                    <div class="col-4"/>
+                    <div class="col-4">
+                        <span>Doctor: </span>
+                        <span t-field="o.name"/>
+                        <br/>
+                        <span>Speciality: </span>
+                        <span t-field="o.specialty"/>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <span>Місто друку: </span>
+                        <span t-field="user.company_id.city"/>
+                    </div>
+                    <div class="col-6 text-right">
+                        <span>Дата друку: </span>
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d.%m.%Y')"/>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <strong><span>Історія діяльності</span></strong>
+                    </div>
+                </div>
+                <div class="row text-center" border="1" style="background-color: lightgrey;">
+                    <div class="col-4" style="border-style: solid;border-width: 1px;">
+                        <span>Name</span>
+                    </div>
+                    <div class="col-4" style="border-style: solid;border-width: 1px;">
+                        <span>Patient</span>
+                    </div>
+                    <div class="col-2" style="border-style: solid;border-width: 1px;">
+                        <span>Visit date</span>
+                    </div>
+                    <div class="col-2" style="border-style: solid;border-width: 1px;">
+                        <span>Visit stop date</span>
+                    </div>
+                </div>
+                <t t-foreach="o.visit_ids" t-as="v">
+                    <div class="row">
+                        <div class="col-4" style="border-style: solid;border-width: 1px;">
+                            <span t-field="v.name"/>
+                        </div>
+                        <div class="col-4" style="border-style: solid;border-width: 1px;">
+                            <span t-field="v.patient_id"/>
+                        </div>
+                        <div class="col-2 text-center" style="border-style: solid;border-width: 1px;">
+                            <span t-field="v.visit_date" t-options="{'format': 'dd.MM.YYYY HH:mm'}"/>
+                        </div>
+                        <div class="col-2 text-center" style="border-style: solid;border-width: 1px;">
+                            <span t-field="v.visit_stop_date" t-options="{'format': 'dd.MM.YYYY HH:mm'}"/>
+                        </div>
+                    </div>
+                </t>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <strong><span>Пацієнти</span></strong>
+                    </div>
+                </div>
+                <table class="table" width="100%" border="1">
+                    <thead>
+                        <tr style="background-color: lightgrey;">
+                            <th class="text-center">#</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Birth date</th>
+                            <th class="text-center">Phone</th>
+                            <th class="text-center">Gender</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="o.patient_ids" t-as="p">
+                            <t t-if="p.diagnosis_count == 0">
+                                <t t-set="color" t-value="'lightgreen'"/>
+                            </t>
+                            <t t-elif="p.diagnosis_count == 1">
+                                <t t-set="color" t-value="'lemonchiffon'"/>
+                            </t>
+                            <t t-else="">
+                                <t t-set="color" t-value="'lightsalmon'"/>
+                            </t>
+                            <tr t-attf-style="background-color: {{color}};">
+                                <td class="text-center"><span t-out="p_index + 1"/></td>
+                                <td><span t-field="p.name"/></td>
+                                <td class="text-center">
+                                    <span t-field="p.birth_date" t-options="{'format': 'dd.MM.YYYY'}"/>
+                                </td>
+                                <td class="text-center"><span t-field="p.phone_number"/></td>
+                                <td class="text-center"><span t-field="p.gender"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="hr_hospital_doctor_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="hr_hospital.hr_hospital_doctor_report_object_template"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

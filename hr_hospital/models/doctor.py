@@ -45,6 +45,10 @@ class Doctor(models.Model):
         compute='_compute_patient_count',
         store=True
     )
+    visit_ids = fields.One2many(
+        comodel_name='hr_hospital.visit',
+        inverse_name='doctor_id'
+    )
 
     @api.depends('patient_ids')
     def _compute_patient_count(self):
