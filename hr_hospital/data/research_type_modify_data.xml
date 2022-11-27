@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_hospital.hr_hospital_research_type_differences_in_group" model="hr_hospital.research_type">
+        <field name="name">Differences in group (modify)</field>
+    </record>
+
+    <delete id="hr_hospital.hr_hospital_research_type_to_delete" model="hr_hospital.research_type"/>
+
+</odoo>

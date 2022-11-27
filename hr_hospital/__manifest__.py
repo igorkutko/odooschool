@@ -35,10 +35,16 @@ Hospital: human resources
         'wizard/disease_report_views.xml',
         'report/doctor_report_templates.xml',
         'report/doctor_report_views.xml',
+        'data/disease_type_data.xml',
+        'data/research_type_data.xml',
+        'data/sample_type_data.xml',
+        'data/research_type_modify_data.xml',
     ],
 
     'demo': [
-
+        'data/contact_person_demo.xml',
+        'data/doctor_demo.xml',
+        'data/patient_demo.xml',
     ],
     'license': 'LGPL-3',
 

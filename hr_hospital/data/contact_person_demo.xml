@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="0">
+
+    <record id="hr_hospital_contact_person_1" model="hr_hospital.contact_person" forcecreate="1">
+        <field name="name">Contact person 1</field>
+        <field name="full_name">Contact person friend 1</field>
+        <field name="phone_number">+38(050)9531572</field>
+        <field name="email">contact_person1@example.com</field>
+        <field name="photo" type="base64" file="hr_hospital/static/img/contact_person1.jpg"/>
+        <field name="gender">female</field>
+    </record>
+
+</odoo>
