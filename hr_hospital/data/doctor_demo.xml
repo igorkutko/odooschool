@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo  noupdate="0">
+
+    <record id="hr_hospital_doctor_1" model="hr_hospital.doctor">
+        <field name="name">Doctor 1</field>
+        <field name="phone_number">+38(067)6951284</field>
+        <field name="email">doctor1@example.com</field>
+        <field name="photo" type="base64" file="hr_hospital/static/img/doctor1.png"/>
+        <field name="gender">male</field>
+        <field name="specialty">Cardiologist</field>
+        <field name="is_intern" eval="False"/>
+    </record>
+
+    <record id="hr_hospital_doctor_2" model="hr_hospital.doctor">
+        <field name="name">Doctor 2</field>
+        <field name="phone_number">+38(050)8576912</field>
+        <field name="email">doctor2@example.com</field>
+        <field name="photo" type="base64" file="hr_hospital/static/img/doctor2.jpg"/>
+        <field name="gender">female</field>
+        <field name="specialty">Ophthalmologist</field>
+        <field name="is_intern" eval="True"/>
+        <field name="mentor_id" ref="hr_hospital.hr_hospital_doctor_1"/>
+    </record>
+
+    <record id="hr_hospital_doctor_3" model="hr_hospital.doctor">
+        <field name="name">Doctor 3</field>
+        <field name="phone_number">+38(093)3254786</field>
+        <field name="email">doctor3@example.com</field>
+        <field name="photo" type="base64" file="hr_hospital/static/img/doctor3.jpg"/>
+        <field name="gender">male</field>
+        <field name="specialty">Neurologist</field>
+        <field name="is_intern" eval="False"/>
+    </record>
+
+</odoo>

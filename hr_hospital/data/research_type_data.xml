@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_hospital_research_type_causal" model="hr_hospital.research_type">
+        <field name="name">Causal</field>
+        <field name="parent_id"/>
+    </record>
+
+    <record id="hr_hospital_research_type_cause_effect" model="hr_hospital.research_type">
+        <field name="name">Cause and effect</field>
+        <field name="parent_id" ref="hr_hospital.hr_hospital_research_type_causal"/>
+    </record>
+
+    <record id="hr_hospital_research_type_comparative" model="hr_hospital.research_type">
+        <field name="name">Comparative</field>
+        <field name="parent_id"/>
+    </record>
+
+    <record id="hr_hospital_research_type_differences_in_group" model="hr_hospital.research_type">
+        <field name="name">Differences in group</field>
+        <field name="parent_id" ref="hr_hospital.hr_hospital_research_type_comparative"/>
+    </record>
+
+    <record id="hr_hospital_research_type_to_delete" model="hr_hospital.research_type">
+        <field name="name">Type to delete</field>
+        <field name="parent_id" ref="hr_hospital.hr_hospital_research_type_comparative"/>
+    </record>
+
+</odoo>

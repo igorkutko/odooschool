@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="0">
+
+    <record id="hr_hospital_patient_1" model="hr_hospital.patient">
+        <field name="name">Patient 1</field>
+        <field name="phone_number">+38(050)4152639</field>
+        <field name="email">patient1@example.com</field>
+        <field name="photo" type="base64" file="hr_hospital/static/img/patient1.jpg"/>
+        <field name="gender">male</field>
+        <field name="birth_date" eval="datetime(2001,5,7)"/>
+        <field name="passport_data">EE 542317</field>
+        <field name="contact_person_id" ref="hr_hospital.hr_hospital_contact_person_1"/>
+        <field name="personal_doctor_id" ref="hr_hospital.hr_hospital_doctor_2"/>
+    </record>
+
+    <record id="hr_hospital_patient_2" model="hr_hospital.patient">
+        <field name="name">Patient 2</field>
+        <field name="phone_number">+38(097)4532168</field>
+        <field name="email">patient2@example.com</field>
+        <field name="photo" type="base64" file="hr_hospital/static/img/patient2.jpg"/>
+        <field name="gender">female</field>
+        <field name="birth_date" eval="datetime(1995,7,16)"/>
+        <field name="passport_data">KK 465278</field>
+        <field name="contact_person_id" ref="hr_hospital.hr_hospital_contact_person_1"/>
+        <field name="personal_doctor_id" ref="hr_hospital.hr_hospital_doctor_3"/>
+    </record>
+
+    <record id="hr_hospital_patient_3" model="hr_hospital.patient">
+        <field name="name">Patient 3</field>
+        <field name="phone_number">+38(063)2315487</field>
+        <field name="email">patient3@example.com</field>
+        <field name="photo" type="base64" file="hr_hospital/static/img/patient3.jpg"/>
+        <field name="gender">male</field>
+        <field name="birth_date" eval="datetime(1989,12,7)"/>
+        <field name="passport_data">EK 246517</field>
+        <field name="contact_person_id" ref="hr_hospital.hr_hospital_contact_person_1"/>
+        <field name="personal_doctor_id" ref="hr_hospital.hr_hospital_doctor_1"/>
+    </record>
+
+</odoo>

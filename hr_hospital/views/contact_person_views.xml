@@ -12,7 +12,7 @@
                         <h3><field name="name" placeholder="Name"/></h3>
                     </div>
                     <group>
-                        <field name="photo"/>
+                        <field name="photo" widget="image"/>
                         <field name="full_name"/>
                         <field name="phone_number"/>
                         <field name="email"/>

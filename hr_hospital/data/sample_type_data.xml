@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_hospital_sample_type_blood" model="hr_hospital.sample_type">
+        <field name="name">Blood</field>
+    </record>
+
+    <record id="hr_hospital_sample_type_skin" model="hr_hospital.sample_type">
+        <field name="name">Skin</field>
+    </record>
+
+    <record id="hr_hospital_sample_type_hair" model="hr_hospital.sample_type">
+        <field name="name">Hair</field>
+    </record>
+
+</odoo>
