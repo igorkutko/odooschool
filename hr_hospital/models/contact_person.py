@@ -6,4 +6,4 @@ class ContactPerson(models.Model):
     _description = 'Contact person'
     _inherit = ['hr_hospital.person', ]
 
-    full_name = fields.Char()
+    full_name = fields.Char(translate=True)
