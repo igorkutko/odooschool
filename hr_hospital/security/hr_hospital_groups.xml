@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_hospital_group_administrator" model="res.groups">
+        <field name="name">HR Hospital / Administrator</field>
+        <field name="category_id" ref="base.module_category_human_resources"/>
+        <field name="users" eval="[(4,ref('base.user_admin'))]"/>
+        <field name="comment">Administrator: full access</field>
+    </record>
+
+    <record id="hr_hospital_group_trainee" model="res.groups">
+        <field name="name">HR Hospital / Trainee</field>
+        <field name="category_id" ref="base.module_category_human_resources"/>
+        <field name="comment">Trainee: limited access</field>
+    </record>
+
+</odoo>
