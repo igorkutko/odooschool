@@ -6,7 +6,7 @@ class Doctor(models.Model):
     _description = 'Doctor'
     _inherit = ['hr_hospital.person']
 
-    specialty = fields.Char()
+    speciality = fields.Char(translate=True)
     is_intern = fields.Boolean()
     mentor_id = fields.Many2one(
         comodel_name='hr_hospital.doctor',
@@ -32,8 +32,8 @@ class Doctor(models.Model):
         related='mentor_id.gender',
         string='Mentor gender'
     )
-    mentor_specialty = fields.Char(
-        related='mentor_id.specialty',
+    mentor_speciality = fields.Char(
+        related='mentor_id.speciality',
         string='Mentor speciality'
     )
     color = fields.Integer()
