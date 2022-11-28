@@ -1,3 +1,4 @@
+from datetime import datetime
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -19,9 +20,15 @@ class Visit(models.Model):
             ('done', 'Done'),
             ('canceled', 'Canceled')],
         default='planned')
+    visit_days = fields.Integer(compute="_compute_visit_days")
 
     @api.ondelete(at_uninstall=False)
     def _unlink_without_diagnosis(self):
         for obj in self:
             if obj.diagnosis_id:
                 raise UserError(_('It can not delete visit with diagnosis!'))
+
+    @api.depends('visit_date')
+    def _compute_visit_days(self):
+        for obj in self:
+            obj.visit_days = (datetime.today() - obj.visit_date).days

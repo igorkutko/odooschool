@@ -14,6 +14,8 @@ Hospital: human resources
     ],
 
     'data': [
+        'security/hr_hospital_groups.xml',
+        'security/hr_hospital_visit_security.xml',
         'security/ir.model.access.csv',
         'views/hr_hospital_menus.xml',
         'views/contact_person_views.xml',

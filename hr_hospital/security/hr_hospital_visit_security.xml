@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="hr_hospital_visit_rule_trainee" model="ir.rule">
+        <field name="name">Limited access to visit for trainee</field>
+        <field name="model_id" ref="model_hr_hospital_visit"/>
+        <field name="groups" eval="[(4,ref('hr_hospital.hr_hospital_group_trainee'))]"/>
+        <field name="domain_force">[('visit_days', '&lt;=', 30)]</field>
+        <field name="perm_read" eval="0"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+</odoo>
