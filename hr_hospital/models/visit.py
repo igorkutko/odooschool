@@ -22,6 +22,23 @@ class Visit(models.Model):
         default='planned')
     visit_days = fields.Integer(compute="_compute_visit_days")
 
+    def default_get(self, fields_list):
+        vals = super().default_get(fields_list)
+        today = datetime.today()
+        vals['visit_date'] = datetime(
+            year=today.year,
+            month=today.month,
+            day=today.day,
+            hour=10
+        )
+        vals['visit_stop_date'] = datetime(
+            year=today.year,
+            month=today.month,
+            day=today.day,
+            hour=11
+        )
+        return vals
+
     @api.ondelete(at_uninstall=False)
     def _unlink_without_diagnosis(self):
         for obj in self:
@@ -32,3 +49,19 @@ class Visit(models.Model):
     def _compute_visit_days(self):
         for obj in self:
             obj.visit_days = (datetime.today() - obj.visit_date).days
+
+    def set_default_values(self):
+        self.ensure_one()
+        today = datetime.today()
+        self.visit_date = datetime(
+            year=today.year,
+            month=today.month,
+            day=today.day,
+            hour=10
+        )
+        self.visit_stop_date = datetime(
+            year=today.year,
+            month=today.month,
+            day=today.day,
+            hour=11
+        )

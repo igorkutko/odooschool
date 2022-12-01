@@ -128,7 +128,7 @@
                                 />
                             </div>
                             <div class="o_dropdown_kanban dropdown">
-                                <a class="dropdown-toggle btn"
+                                <a class="dropdown-toggle btn" role="button"
                                    data-toggle="dropdown"
                                    href="#" aria-label="Dropdown menu" title="Dropdown menu">
                                    <span class="fa fa-ellipsis-v" aria-hidden="true"/>
