@@ -44,27 +44,35 @@ class Patient(models.Model):
     research_count = fields.Integer(compute='_compute_research_count')
 
     def write(self, vals):
+        """
+        Searches and creates a record in personal doctor history
+        :param vals: values od fields for creating personal doctor history
+        :return result: record of personal doctor history
+        """
         result = super(Patient, self).write(vals)
 
         for obj in self:
             if not vals.get('personal_doctor_id'):
                 continue
+            # values for personal doctor history
             history_vals = {
                 'name': obj['name'],
                 'appointment_date': fields.Date.today(),
                 'patient_id': obj['id'],
                 'doctor_id': vals.get('personal_doctor_id'),
             }
-
+            # domain for searching personal doctor history
             key_domain = [
                 ('patient_id', '=', history_vals.get('patient_id')),
                 ('doctor_id', '=', history_vals.get('doctor_id')),
             ]
             pd_manager = self.env['hr_hospital.personal_doctor_history']
+
+            # searching a record in personal doctor history by domain
             history_recs = pd_manager.search(key_domain)
             if history_recs:
                 continue
-
+            # creating a record in a personal doctor history
             pd_manager.create(history_vals)
 
         return result
